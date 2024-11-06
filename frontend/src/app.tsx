@@ -1,8 +1,22 @@
+import {
+  createBrowserRouter,
+  RouterProvider
+} from "react-router-dom"
+
+import { PaginaLogin } from "./pages/login/pagina-login"
+
+
 export function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/login",
+      element: <PaginaLogin />
+    },
+  ])
 
   return (
-    <div className="text-3xl text-cyan-600 font-semibold flex justify-center items-center min-h-screen w-full">
-      Hello World
+    <div className="h-screen w-full">
+      <RouterProvider router={router} />
     </div>
   )
 }

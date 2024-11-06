@@ -32,3 +32,12 @@
     --chart-5: 340 75% 55%;
   }
 }
+
+@layer base {
+  html {
+    @apply h-full
+  }
+  body {
+    @apply h-full
+  }
+}
