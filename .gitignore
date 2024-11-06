@@ -2,3 +2,4 @@ venv/
 .env
 .vite/
 __pycache__/
+db.*
