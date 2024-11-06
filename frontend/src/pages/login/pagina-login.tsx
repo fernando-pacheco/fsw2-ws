@@ -1,7 +1,19 @@
 import { LogInIcon } from "lucide-react";
 import { Button } from "../../components/ui/button";
+import { SignInButton, useAuth } from "@clerk/clerk-react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function PaginaLogin() {
+    const { userId } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (userId) {
+            navigate('/');
+        }
+    }, [userId]);
+
     return (
         <div className="grid grid-cols-2">
             <div className="px-2 gap-8 flex flex-col justify-center max-w-[500px] mx-auto">
@@ -25,10 +37,12 @@ export function PaginaLogin() {
                         IA para monitorar suas movimentações, e oferecer insights
                         personalizados, facilitando o controle do seu orçamento.
                     </p>
-                    <Button variant="outline" className="mt-3">
-                        <LogInIcon className="mr-2" />
-                        Fazer login ou criar conta
-                    </Button>
+                    <SignInButton>
+                        <Button variant="outline" className="mt-3 rounded-xl">
+                            <LogInIcon className="mr-2" />
+                            Fazer login ou criar conta
+                        </Button>
+                    </SignInButton>
                 </div>
             </div>
             <div className="w-full h-full relative">
@@ -39,5 +53,5 @@ export function PaginaLogin() {
                 />
             </div>
         </div>
-    )
+    );
 }
