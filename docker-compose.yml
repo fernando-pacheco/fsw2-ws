@@ -1,0 +1,43 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - SECRET_KEY=$SECRET_KEY
+      - DB_NAME=$DB_NAME
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PW
+      - DB_HOST=$DB_HOST
+      - DB_PORT=$DB_PORT
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
+      - "5173:5173"
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PW
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
